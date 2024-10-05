@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramayana Themed Audio Buttons with Background Music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url('ramayana-background.jpg'); /* Path to your Ramayana-themed image */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
+            color: white;
+            height: 100vh;
+        }
+    h1 {
+            color: black; /* Set the color of the heading to black */
+        }
+        h2 {
+            color: black; /* Set the color of the subheading */
+            font-size: 18px; /* Smaller font size for the subheading */
+            margin-top: 10px; /* Space between h1 and h2 */
+        }
+       .button-container {
+            display: flex;
+            justify-content: space-between; /* Ensures space between buttons */
+            margin: 20px;  /* Adds margin around the container */
+        }
+        .button {
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: rgba(0, 128, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 200px;     /* Fixed width for uniform size */
+            height: 55px;     /* Fixed height for uniform size */
+            margin: 10px 0;   /* Adds vertical margin */
+        }
+        .button:hover {
+            background-color: rgba(0, 100, 0, 0.7);
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between; /* Space between left and right buttons */
+            margin: 20px;  /* Adds margin around the container */
+            align-items: center; /* Aligns items vertically in the center */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Listen to a Ramayana Story!</h1>
+    <h2> Narrated by Udbhav and Atharv </h2>
+
+    <!-- Button-triggered Audios -->
+    <div>
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio1')">1. Birth of Rama</button>
+    <button class="button" onclick="playButtonAudio('audio7')">7. Surpanagai's Nose</button>
+    </div>
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio2')">2. Rama's Study</button>
+    <button class="button" onclick="playButtonAudio('audio8')">8. Golden Deer</button>
+    </div>
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio3')">3. Thatakai Vadham</button>
+    <button class="button" onclick="playButtonAudio('audio9')">9. Sanjeevi Malai</button>
+    </div>
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio4')">4. Maaresan Vadham</button>
+    <button class="button" onclick="playButtonAudio('audio10')">10. Ravana's Court</button>
+    </div>  
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio5')">5. Seetha Kalyanam</button>
+    <button class="button" onclick="playButtonAudio('audio11')">11. Ashoka Vanam</button>
+    </div>
+    <div class="button-row">
+    <button class="button" onclick="playButtonAudio('audio6')">6. Rama's Exile</button>
+    <button class="button" onclick="playButtonAudio('audio12')">12. Yuddham</button>
+    </div>
+    <!-- Button to start background music -->
+    <button class="button" id="start-music" onclick="startBackgroundMusic()">Start Background Music</button>
+
+    <!-- Background Music that plays on loop -->
+    <audio id="background-music" src="background-music.mp3" loop></audio>
+
+    <!-- Button-triggered Audios -->
+    <audio id="audio1" src="audio1.m4a"></audio>
+    <audio id="audio2" src="audio2.m4a"></audio>
+    <audio id="audio3" src="audio3.m4a"></audio>
+    <audio id="audio4" src="audio4.m4a"></audio>
+    <audio id="audio5" src="audio5.m4a"></audio>
+    <audio id="audio6" src="audio6.m4a"></audio>
+    <audio id="audio7" src="audio7.m4a"></audio>
+    <audio id="audio8" src="audio8.m4a"></audio>
+    <audio id="audio9" src="audio9.m4a"></audio>
+    <audio id="audio10" src="audio10.m4a"></audio>
+    <audio id="audio11" src="audio11.m4a"></audio>
+    <audio id="audio12" src="audio12.m4a"></audio>
+
+    <script>
+        let currentAudio = null; // Variable to keep track of the currently playing audio
+
+        // Function to start background music
+        function startBackgroundMusic() {
+            const backgroundMusic = document.getElementById('background-music');
+            backgroundMusic.volume = 0.1; // Set the volume to 10% (adjust as needed)
+            backgroundMusic.play().catch(error => {
+                console.log('Background music failed to play:', error);
+            });
+
+            // Hide the start button once music plays
+            document.getElementById('start-music').style.display = 'none';
+        }
+
+        // Function to play audio when a button is clicked
+        function playButtonAudio(audioId) {
+            const buttonAudio = document.getElementById(audioId);
+
+            // Stop the currently playing audio (if any)
+            if (currentAudio && currentAudio !== buttonAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0; // Reset to start
+            }
+
+            // Play the new audio
+            buttonAudio.play().catch(error => {
+                console.log('Audio failed to play:', error);
+            });
+
+            // Set this audio as the currently playing one
+            currentAudio = buttonAudio;
+        }
+    </script>
+
+</body>
+</html>
